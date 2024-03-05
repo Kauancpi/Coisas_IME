@@ -12,7 +12,7 @@ int main() {
     cin >> maps;
     int i=0;
     
-    while (std::cin >> key1 >> key2 >> value && i<maps) {
+    while (std::cin >> key1 >> key2 >> value && i<maps-1) {
         myMap[{key1, key2}] = value;
         i++;
     }
