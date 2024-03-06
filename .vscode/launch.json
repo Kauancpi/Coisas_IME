@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/kauan/projects/Coisas_em_cpp/imepp/homework1",
-      "program": "c:/Users/kauan/projects/Coisas_em_cpp/imepp/homework1/build/Debug/outDebug",
+      "cwd": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_em_cpp/imepp/homework1",
+      "program": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_em_cpp/imepp/homework1/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
