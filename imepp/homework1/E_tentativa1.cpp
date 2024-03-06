@@ -24,27 +24,16 @@ bool search(node*head,int x){
     return(search(head->next,x));
 }
 
-int getCount(node* head)
-{
-    int count = 0; // Initialize count
-    node* current = head; // Initialize current
-    while (current != NULL) {
-        count++;
-        current = current->next;
-    }
-    return count;
-}
-
 int achar_minimo_maior(node*head,int x){
-    int count = getCount(head);
+    node* current=head;
     int k=1000000000;
-    node* current = head;
-    for(int i=0;i<count;i++){
+    while(current!=NULL){
         if(current->data >= x && current->data < k){
             k=current->data;
         }
+        current = current->next;
     }
-    if(k=1000000000){
+    if(k==1000000000){
         return(-1);
     }
     else{
@@ -52,28 +41,28 @@ int achar_minimo_maior(node*head,int x){
     }
 }
 
-
 int main(){
     
-    int nao_sei_mais_que_nome_dar;
+    int modulo;
     node* head=NULL;
     int numero_de_operacoes;
     int numero;
     int numero_temp=0;
     string operacao;
     bool existe;
+    string operacao_temp="+";
 
     cin >> numero_de_operacoes;
 
     for(int i=0;i<numero_de_operacoes;i++){
 
-        cin >> operacao >> numero;
-        string operacao_temp = operacao;
+        std::cin >> operacao >> numero;
         
         if(operacao=="+" && operacao_temp!="?"){
             existe = search(head,numero);
             if(existe==true){
-                break;
+                operacao_temp = operacao;
+                continue;
 
             }
             if(existe==false){
@@ -81,22 +70,29 @@ int main(){
             }
 
         }
-        if(operacao=="?"){
+        else if(operacao=="?"){
             numero_temp=achar_minimo_maior(head,numero);
             cout << numero_temp << "\n";
 
         }
-        if(operacao=="+" && operacao_temp =="?"){
-            nao_sei_mais_que_nome_dar=(numero+numero_temp)%1000000000;
-            existe = search(head,nao_sei_mais_que_nome_dar);
+        else if(operacao=="+" && operacao_temp == "?"){
+                
+            modulo = (numero+numero_temp)%1000000000;
+            if(modulo<0){
+                modulo=1000000000+modulo;
+            }
+            existe = search(head,modulo);
             if(existe==true){
-                break;
+                operacao_temp = operacao;
+                continue;
 
             }
             if(existe==false){
-                push(&head,nao_sei_mais_que_nome_dar);
-            }
+                push(&head,modulo);
+                } 
 
         }
+        operacao_temp = operacao;
+        
     }
 }
