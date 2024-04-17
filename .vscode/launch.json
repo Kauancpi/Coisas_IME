@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/kauan/projects/Coisas_em_cpp/imepp/homework2",
-      "program": "c:/Users/kauan/projects/Coisas_em_cpp/imepp/homework2/build/Debug/outDebug",
+      "cwd": "c:/Users/kauan/projects/Coisas_em_cpp/sistemas_digitais",
+      "program": "c:/Users/kauan/projects/Coisas_em_cpp/sistemas_digitais/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
