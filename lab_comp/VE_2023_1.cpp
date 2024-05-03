@@ -281,6 +281,8 @@ int main(){
 
     std::cout << battle_royale[0]->get_name() << " ganhou" << endl;
 
+    return(0);
+
 
 
 }

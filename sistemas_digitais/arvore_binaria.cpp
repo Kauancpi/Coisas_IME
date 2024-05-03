@@ -1,72 +1,96 @@
 #include <iostream>
+#include <new>
 
 using namespace std;
 
-
-
-class no{
-    public:
-    no(){
-        valor = -1;
-        esquerda=NULL;
-        direita=NULL;
-    };
-    int valor;
+struct no{
+    int chave;
     no *esquerda;
     no *direita;
 };
 
-int adicionar_valor(int k, no **raiz_arvore){
-    if((*raiz_arvore)->valor==-1){
-        (*raiz_arvore)->valor=k;
+void criar_no(no **node,int xdd){
+    *node = new no();
+    if(!node){
+        cout << "error" << endl;
+    }
+    (*node)->chave=xdd;
+    (*node)->direita=(*node)->esquerda=NULL;
+}
+
+int adicionar_elemento(no **raiz,int xdd){
+    
+    if(*raiz==NULL){
+        criar_no(raiz,xdd);
         return(0);
-
     }
-    else{
-        if(k<(*raiz_arvore)->valor){
-            no esquerda;
-            (*raiz_arvore)->esquerda=&esquerda;
-            adicionar_valor(k,&(*raiz_arvore)->esquerda);
-
-        }
-        if(k>(*raiz_arvore)->valor){
-            no direita;
-            (*raiz_arvore)->direita=&direita;
-            adicionar_valor(k,&(*raiz_arvore)->direita);
-        }
-        if(k==(*raiz_arvore)->valor){
-            return(0);
-        }
-
+    else if(xdd < (*raiz)->chave){
+        adicionar_elemento(&(*raiz)->esquerda,xdd);
+        return(0);
     }
+    else if(xdd > (*raiz)->chave){
+        adicionar_elemento(&(*raiz)->direita,xdd);
+        return(0);
+    }
+    else if(xdd==(*raiz)->chave){
+        cout << "Nao da pra inserir";
+        return(0);
+    }
+    
+}
 
+int imprimir_arvore(no *raiz){
+    if(raiz==NULL){
+        return(0);
+    }
+    cout << raiz->chave << endl;
+    imprimir_arvore(raiz->esquerda);
+    imprimir_arvore(raiz->direita);
     return(0);
 
 }
 
-int imprimir_arvore(no *raiz_arvore){
-    cout << raiz_arvore->valor;
-    if(raiz_arvore->esquerda!=NULL){
-        imprimir_arvore(raiz_arvore->esquerda);
-
+struct no *busca(no *raiz,int xdd,no **pai){
+    while(raiz->chave!=xdd){
+        if(xdd<raiz->chave && raiz->esquerda!=NULL){
+            raiz=raiz->esquerda;
+        }
+        else if(xdd>raiz->chave && raiz->direita!=NULL){
+            raiz=raiz->direita;
+        }
+        else{
+            break;
+        }
     }
-    if(raiz_arvore->direita!=NULL){
-        imprimir_arvore(raiz_arvore->direita);
+    if(xdd==raiz->chave){
+        return(raiz);
     }
-    return(0);
+    return(NULL);
 }
 
 int main(){
-    no raiz;
+    no *raiz=NULL;
+    no *cum;
 
-    no*raiz_arvore=&raiz;
-    
-    adicionar_valor(3,&raiz_arvore);
-    adicionar_valor(2,&raiz_arvore);
-    adicionar_valor(1,&raiz_arvore);
-    adicionar_valor(4,&raiz_arvore);
-    adicionar_valor(5,&raiz_arvore);
+    adicionar_elemento(&raiz,40);
+    adicionar_elemento(&raiz,20);
+    adicionar_elemento(&raiz,10);
+    adicionar_elemento(&raiz,30);
+    adicionar_elemento(&raiz,80);
+    adicionar_elemento(&raiz,60);
+    adicionar_elemento(&raiz,50);
+    adicionar_elemento(&raiz,70);
 
-    imprimir_arvore(raiz_arvore);
+    imprimir_arvore(raiz);
+    cum=busca(raiz,10,NULL);
+
+    cout << endl;
+
+    imprimir_arvore(cum);
+
+
+
+
+
 
 }

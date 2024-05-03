@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/kauan/projects/Coisas_em_cpp/lab_comp",
-      "program": "c:/Users/kauan/projects/Coisas_em_cpp/lab_comp/build/Debug/outDebug",
+      "cwd": "c:/Users/kauan/projects/Coisas_em_cpp",
+      "program": "c:/Users/kauan/projects/Coisas_em_cpp/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
