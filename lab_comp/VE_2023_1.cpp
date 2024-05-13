@@ -18,6 +18,7 @@ class soldado{
             poder_de_ataque=10;
         }
     }
+    soldado(){}
 
     virtual void atacar(shared_ptr<soldado> soldado2);
     void defesa(float ataque);
@@ -155,11 +156,16 @@ class mago: public soldado{
         exercito_de_zumbis.push_back(z);
         exercito_de_zumbis.push_back(z);
     }
+    mago(const mago &mago2){
+
+
+    }
 
     int get_size();
 
     void atacar(shared_ptr<soldado> soldado2) override;
 
+    
     ~mago(){
         exercito_de_zumbis.clear();
     }
