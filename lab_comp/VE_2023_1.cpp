@@ -157,6 +157,10 @@ class mago: public soldado{
         exercito_de_zumbis.push_back(z);
     }
     mago(const mago &mago2){
+        exercito_de_zumbis.reserve(mago2.exercito_de_zumbis.size());
+        for(int i=0;i<mago2.exercito_de_zumbis.size();i++){
+            exercito_de_zumbis.push_back(mago2.exercito_de_zumbis[i]);
+        }
 
 
     }
