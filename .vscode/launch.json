@@ -1,7 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -9,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/kauan/projects/Coisas_em_cpp/lab_comp/ve_2021",
-      "program": "c:/Users/kauan/projects/Coisas_em_cpp/lab_comp/ve_2021/build/Debug/outDebug",
+      "cwd": "c:/Users/kauan/projects/Coisas_em_cpp/lab_comp/ve_3_2022",
+      "program": "c:/Users/kauan/projects/Coisas_em_cpp/lab_comp/ve_3_2022/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
