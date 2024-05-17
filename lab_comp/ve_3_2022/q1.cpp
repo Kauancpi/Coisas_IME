@@ -3,6 +3,9 @@
 
 using namespace std;
 
+
+
+
 class jogo_forca{
     int numero_de_tentativas;
     int numero_maximo;
@@ -13,6 +16,7 @@ class jogo_forca{
     public: 
     jogo_forca(std::vector<string> &cum):lista_palavras(cum),numero_maximo(10),palavra_atual(""){}
 
+  
     bool iniciar(){
         srand(time(NULL));
         if(lista_palavras.size()==0){
