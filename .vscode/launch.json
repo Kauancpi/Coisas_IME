@@ -8,8 +8,13 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
+<<<<<<< HEAD
       "cwd": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_em_cpp",
       "program": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_em_cpp/build/Debug/outDebug",
+=======
+      "cwd": "c:/Users/kauan/projects/Coisas_em_cpp/lab_comp/ve_2024",
+      "program": "c:/Users/kauan/projects/Coisas_em_cpp/lab_comp/ve_2024/build/Debug/outDebug",
+>>>>>>> 45917a3a11263fc5e72da7964092d1d383f31afd
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
