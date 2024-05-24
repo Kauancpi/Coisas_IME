@@ -45,7 +45,7 @@ int main(){
     delete x3;
     delete x4;
 
-    contador::show();
+    contador::show(); 
 
     
 }
