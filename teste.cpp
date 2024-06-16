@@ -14,3 +14,13 @@ class Soldado{
     Soldado(string nome_personagem,int saude_valor,int ataque):nome(nome_personagem),saude(saude_valor),poder_de_ataque(ataque){}
     
 };
+
+Soldado &aaaa(int a){
+    
+}
+
+int main(){
+    int x;
+    
+    
+}
