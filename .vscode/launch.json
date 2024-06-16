@@ -8,10 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_IME",
-      "program": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_IME/build/Debug/outDebug",
-      "cwd": "c:/Users/kauan/projects/Coisas_IME/lab_comp/ve_2024",
-      "program": "c:/Users/kauan/projects/Coisas_IME/lab_comp/ve_2024/build/Debug/outDebug",
+      "cwd": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_em_cpp/estrutura_de_dados",
+      "program": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_em_cpp/estrutura_de_dados/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
