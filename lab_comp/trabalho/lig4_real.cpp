@@ -1,172 +1,241 @@
 #include <iostream>
-#include <vector>
-#include <limits>
 
 using namespace std;
 
-class Connect4 {
-    vector<vector<char>> board;
-    int rows;
-    int cols;
-    int currentPlayer;
+class lig4{
+    char **pointer; 
+    int linhas;
+    int colunas;
+    int vez_jogador;
+   
+    public:
+    lig4(int numero_linhas,int numero_colunas):vez_jogador(1),linhas(numero_linhas),colunas(numero_colunas){
+        pointer= new char*[numero_linhas];
 
-public:
-    Connect4(int numRows, int numCols) : rows(numRows), cols(numCols), currentPlayer(1) {
-        board.resize(numRows, vector<char>(numCols, '.'));
+        for(int i=0;i<numero_linhas;i++){
+            pointer[i]=new char[numero_colunas];
+        }
+        for(int i=0;i<numero_linhas;i++){
+            for(int j=0;j<numero_colunas;j++){
+                pointer[i][j]='.';
+            }
+        }
     }
 
-    void printBoard() {
-        for (int i = 0; i < rows; i++) {
+    lig4(lig4 &copia){
+        linhas=copia.linhas;
+        colunas=copia.colunas;
+        vez_jogador=copia.vez_jogador;
+
+        pointer=new char*[linhas];
+        for(int i=0;i<linhas;i++){
+            pointer[i]=new char[colunas];
+        }
+        for(int i=0;i<linhas;i++){
+            for(int j=0;j<colunas;j++){
+                pointer[i][j]=copia.pointer[i][j];
+            }
+        }
+    }
+
+    void imprimir(){
+        for(int i=0;i<linhas;i++){
             cout << endl;
-            for (int j = 0; j < cols; j++) {
-                cout << board[i][j] << ' ';
+            for(int j=colunas-1;j>=0;j--){
+                cout << pointer[i][j] << ' ';
             }
         }
         cout << endl;
-        for (int i = 0; i < cols; i++) {
-            cout << i + 1 << " ";
+        for(int i=0;i<colunas;i++){
+            cout << i+1 << " ";
         }
         cout << endl;
-    }
 
-    bool isValidMove(int col) {
-        return col >= 0 && col < cols && board[0][col] == '.';
     }
-
-    bool makeMove(int col, char token) {
-        if (isValidMove(col)) {
-            for (int i = rows - 1; i >= 0; i--) {
-                if (board[i][col] == '.') {
-                    board[i][col] = token;
-                    return true;
-                }
-            }
+    void alternar_vez(){
+        if(vez_jogador==1){
+            vez_jogador=2;
         }
-        return false;
-    }
-
-    bool isFull() {
-        for (int j = 0; j < cols; j++) {
-            if (board[0][j] == '.') return false;
-        }
-        return true;
-    }
-
-    bool checkWin(char token) {
-        // Check horizontal, vertical, and both diagonal directions
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (board[i][j] == token) {
-                    if (j + 3 < cols && board[i][j + 1] == token && board[i][j + 2] == token && board[i][j + 3] == token)
-                        return true;
-                    if (i + 3 < rows && board[i + 1][j] == token && board[i + 2][j] == token && board[i + 3][j] == token)
-                        return true;
-                    if (i + 3 < rows && j + 3 < cols && board[i + 1][j + 1] == token && board[i + 2][j + 2] == token && board[i + 3][j + 3] == token)
-                        return true;
-                    if (i + 3 < rows && j - 3 >= 0 && board[i + 1][j - 1] == token && board[i + 2][j - 2] == token && board[i + 3][j - 3] == token)
-                        return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    void switchPlayer() {
-        currentPlayer = 3 - currentPlayer;
-    }
-
-    int minimax(int depth, bool isMaximizing) {
-        if (checkWin('O')) return 10 - depth;
-        if (checkWin('X')) return depth - 10;
-        if (isFull()) return 0;
-
-        if (isMaximizing) {
-            int bestScore = numeric_limits<int>::min();
-            for (int j = 0; j < cols; j++) {
-                if (isValidMove(j)) {
-                    makeMove(j, 'O');
-                    int score = minimax(depth + 1, false);
-                    board[0][j] = '.'; // Undo move
-                    bestScore = max(bestScore, score);
-                }
-            }
-            return bestScore;
-        } else {
-            int bestScore = numeric_limits<int>::max();
-            for (int j = 0; j < cols; j++) {
-                if (isValidMove(j)) {
-                    makeMove(j, 'X');
-                    int score = minimax(depth + 1, true);
-                    board[0][j] = '.'; // Undo move
-                    bestScore = min(bestScore, score);
-                }
-            }
-            return bestScore;
+        else if(vez_jogador==2){
+            vez_jogador=1;
         }
     }
-
-    int getBestMove() {
-        int bestScore = numeric_limits<int>::min();
-        int move = -1;
-        for (int j = 0; j < cols; j++) {
-            if (isValidMove(j)) {
-                makeMove(j, 'O');
-                int score = minimax(0, false);
-                board[0][j] = '.'; // Undo move
-                if (score > bestScore) {
-                    bestScore = score;
-                    move = j;
-                }
+    bool verificar(int coluna){
+        if(coluna>colunas || coluna<1){
+            return(false);
+        }
+        for(int i=0;i<linhas;i++){
+            if(pointer[i][colunas-coluna]=='.'){
+                return(true);
             }
         }
-        return move;
+        return(false);
+
     }
 
-    void playGame() {
-        char playAgain = 'y';
-        while (playAgain == 'y' || playAgain == 'Y') {
-            board = vector<vector<char>>(rows, vector<char>(cols, '.'));
-            currentPlayer = 1;
-            while (!isFull() && !checkWin('X') && !checkWin('O')) {
-                printBoard();
-                int move;
-                if (currentPlayer == 1) {
-                    cout << "Player " << currentPlayer << " turn (1-" << cols << "): ";
-                    cin >> move;
-                    move--;
-                } else {
-                    move = getBestMove();
-                    cout << "AI chose column " << move + 1 << endl;
-                }
-                if (makeMove(move, currentPlayer == 1 ? 'X' : 'O')) {
-                    if (checkWin(currentPlayer == 1 ? 'X' : 'O')) {
-                        printBoard();
-                        cout << "Player " << currentPlayer << " wins!" << endl;
-                        break;
+    bool jogar(int coluna){
+        if(verificar(coluna)){
+            if(vez_jogador==1){
+                for(int i=linhas-1;i>=0;i--){
+                    if(pointer[i][colunas-coluna]=='.'){
+                        pointer[i][colunas-coluna]='X';
+                        return(true);
                     }
-                    switchPlayer();
-                } else {
-                    cout << "Invalid move. Try again." << endl;
                 }
             }
-            if (isFull() && !checkWin('X') && !checkWin('O')) {
-                cout << "It's a tie!" << endl;
+            else if(vez_jogador==2){
+                for(int i=linhas-1;i>=0;i--){
+                    if(pointer[i][colunas-coluna]=='.'){
+                        pointer[i][colunas-coluna]='O';
+                        return(true);
+                    }
+                }
             }
-            cout << "Play again? (y/n): ";
-            cin >> playAgain;
         }
+        return(false);
+    }
+    bool game_over(){
+        pair<int,int> lol;
+
+        lol=resultado_final();
+        if(lol.first!=0 || lol.second!=0){
+            return(true);
+        }
+        for(int i=0;i<linhas;i++){
+            for(int j=0;j<colunas;j++){
+                if(pointer[i][j]=='.'){
+                    return(false);
+                }
+            }
+        }
+        return(true);
+    }
+    pair<int,int> resultado_final(){
+        int pontos1=0;
+        int pontos2=0;
+        pair<int,int> xdd;
+
+        for(int i=0;i<linhas;i++){
+            for(int j=0;j<colunas;j++){
+                if(pointer[i][j]=='X'){
+                    if(j+3<colunas){
+                        if(pointer[i][j+1]=='X'&&pointer[i][j+2]=='X'&&pointer[i][j+3]=='X'){
+                            pontos1++;
+                        }
+                    }
+                    if(i+3<linhas){
+                        if(pointer[i+1][j]=='X' && pointer[i+2][j]=='X' && pointer[i+3][j]=='X'){
+                            pontos1++;
+                        }
+                    }
+                    if(i+3<linhas && j+3< colunas){
+                        if(pointer[i+1][j+1]=='X' && pointer[i+2][j+2]=='X' && pointer[i+3][j+3]=='X'){
+                            pontos1++;
+                        }
+                    }
+                    if(i+3<linhas && j-3>=0){
+                        if(pointer[i+1][j-1]=='X' && pointer[i+2][j-2]=='X' && pointer[i+3][j-3]=='X'){
+                            pontos1++;
+                        }
+                    }
+
+                }
+                else if(pointer[i][j]=='O'){
+                    if(j+3<colunas){
+                        if(pointer[i][j+1]=='O'&&pointer[i][j+2]=='O'&&pointer[i][j+3]=='O'){
+                            pontos2++;
+                        }
+                    }
+                    if(i+3<linhas){
+                        if(pointer[i+1][j]=='O' && pointer[i+2][j]=='O' && pointer[i+3][j]=='O'){
+                            pontos2++;
+                        }
+                    }
+                    if(i+3<linhas && j+3< colunas){
+                        if(pointer[i+1][j+1]=='O' && pointer[i+2][j+2]=='O' && pointer[i+3][j+3]=='O'){
+                            pontos2++;
+                        }
+                    }
+                    if(i+3<linhas && j-3>=0){
+                        if(pointer[i+1][j-1]=='O' && pointer[i+2][j-2]=='O' && pointer[i+3][j-3]=='O'){
+                            pontos2++;
+                        }
+                    }
+
+                }
+
+            }
+        }
+        xdd.first=pontos1;
+        xdd.second=pontos2;
+
+        return(xdd);
+    }
+    
+    void jogar_jogo(){
+        
+        char c='s';
+        int k;
+        while(c=='s'||c=='S'){
+            for(int i=0;i<linhas;i++){
+                for(int j=0;j<colunas;j++){
+                    pointer[i][j]='.';
+                }
+            }
+            vez_jogador=1;
+            while(!game_over()){
+                cout << "Vez do jogador " << vez_jogador << ":" << endl;
+                imprimir();
+
+                do{
+                    cout << "Em qual coluna vc gostaria de jogar? (1- " << colunas << ")" << endl;
+                    cin >> k;
+                } while(!verificar(k));
+
+                jogar(k);
+                alternar_vez();
+            }
+            imprimir();
+            pair<int,int> a = resultado_final();
+            if(a.first==1){
+                cout << "jogador 1 ganhou" << endl;
+            }
+            else if(a.second==1){
+                cout << "jogador 2 ganhou" << endl;
+            }
+            else{
+                cout << "empate" << endl;
+            }
+            cout << "Gostaria de jogar novamente? (s/n)" << endl;
+            cin >> c; 
+        }
+
+    }
+    
+
+
+
+    ~lig4(){
+        for(int i=0;i<linhas;i++){
+            delete[] pointer[i];
+        }
+        delete[] pointer;
     }
 };
 
-int main() {
-    int rows, cols;
-    cout << "Enter the number of rows: ";
-    cin >> rows;
-    cout << "Enter the number of columns: ";
-    cin >> cols;
 
-    Connect4 game(rows, cols);
-    game.playGame();
 
-    return 0;
+
+int main(){
+    int linhas;
+    int colunas;
+    
+    cout << "Coloque o numero de linhas: " << endl;
+    cin >> linhas;
+
+    cout << "Coloque o numero de colunas: " <<endl;
+    cin >> colunas;
+    
+    lig4 jogo(linhas,colunas);
+    jogo.jogar_jogo();
 }
