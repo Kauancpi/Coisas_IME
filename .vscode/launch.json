@@ -1,23 +1,6 @@
 {
-<<<<<<< HEAD
     "version": "0.2.0",
     "configurations": [
-=======
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "args": [],
-      "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_em_cpp/estrutura_de_dados",
-      "program": "c:/Users/kauan/OneDrive/Documents/GitHub/Coisas_em_cpp/estrutura_de_dados/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
->>>>>>> ef56797628bfc6897322f939ce2429dd8a8ae348
         {
             "name": "C/C++ Runner: Debug Session",
             "type": "cppdbg",
