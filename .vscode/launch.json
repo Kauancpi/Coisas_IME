@@ -2,6 +2,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Strings",
+            "request": "launch",
+            "mainClass": "lab_comp2.Strings",
+            "projectName": "Coisas_IME_c222999d"
+        },
+        {
+            "type": "java",
+            "name": "Hello",
+            "request": "launch",
+            "mainClass": "lab_comp2.Hello",
+            "projectName": "Coisas_IME_c222999d"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "lab_comp2.Main",
+            "projectName": "Coisas_IME_c222999d"
+        },
+        {
             "name": "C/C++ Runner: Debug Session",
             "type": "cppdbg",
             "request": "launch",
